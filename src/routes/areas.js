@@ -110,11 +110,11 @@ areas.patch("/:id", async(req, res)=>{
     const body = req.body
     try {
         await client.connect()
-        
+
         body["fecha_creacion"] = convertDate(body["fecha_creacion"])
 
         const result = await client.db("classify").collection("areas").updateOne({_id: new ObjectId(id)}, {$set: body, $currentDate: { lastModified: true }}, {upsert: true})
-        
+
         if(result.modifiedCount <= 0){
             res.status(404).json({
                 status: 404,
@@ -131,7 +131,8 @@ areas.patch("/:id", async(req, res)=>{
     }
 })
 
-// Update student
+
+// Update areas
 areas.put("/update_many_areas", async(req, res)=>{
     const body = req.body
     try {
@@ -158,7 +159,7 @@ areas.put("/update_many_areas", async(req, res)=>{
 })
 
 
-
+// Delete area
 areas.delete("/:id", async(req, res) => {
     const id = req.params.id
     try {
