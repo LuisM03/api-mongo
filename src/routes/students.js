@@ -55,9 +55,7 @@ students.post("/", async(req, res)=>{
     try {
         await client.connect()
         body["fecha_nacimiento"] = convertDate(body["fecha_nacimiento"])
-        
         const result = await client.db("classify").collection("estudiantes").insertOne(body)
-        
         if(result){
             res.status(201).json({
                 status: 201,
@@ -165,34 +163,9 @@ students.put("/update_many", async(req, res)=>{
     try {
         await client.connect()
 
-        const result = await client.db("classify").collection("estudiantes").updateMany({nombre_completo: {$regex: /Andres/g }}, {$set: body})
-        
-        if(result){
-            res.status(201).json({
-                status: 201,
-                message: 'updated students many whitout upsert',
-                data: result
-            })
-        }else{
-            res.status(400).json({
-                status: 400,
-                message: "students not updated"
-            })
-        }
-    } finally {
-    }
-})
-
-
-// Update student upsert
-students.put("/update_many/upsert", async(req, res)=>{
-    const body = req.body
-    try {
-        await client.connect()
-
         body["fecha_nacimiento"] = convertDate(body["fecha_nacimiento"])
 
-        const result = await client.db("classify").collection("estudiantes").updateMany({nombre_completo: {$regex: /Kil/g }}, {$set: body}, {upsert: true})
+        const result = await client.db("classify").collection("estudiantes").updateMany({nombre_completo: {$regex: /Andres/g }}, {$set: body}, {upsert: true})
         
         if(result){
             res.status(201).json({
