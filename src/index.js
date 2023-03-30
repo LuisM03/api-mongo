@@ -6,6 +6,7 @@ const port = process.env.PORT || 4000
 const ratingsRouter = require('./routes/ratings')
 
 // Middlewares
+/* A middleware that parses the body of the request and makes it available in the req.body property. */
 app.use(express.json())
 
 // Rutas

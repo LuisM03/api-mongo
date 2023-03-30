@@ -3,9 +3,11 @@ const client = require('../utils/connectdb/conn')
 const {ObjectId} = require("mongodb")
 const convertDate = require("../utils/functions/date")
 
+/* Creating a new router object. */
 const ratings = express.Router()
 
 // Get all ratings
+/* A function that is called when the user makes a GET request to the route /. */
 ratings.get("/", async(req, res)=>{
     try {
         await client.connect()
@@ -27,6 +29,7 @@ ratings.get("/", async(req, res)=>{
 })
 
 // Get one ratings
+/* A function that is called when the user makes a GET request to the route /:id. */
 ratings.get("/:id", async(req, res)=>{
     let id = req.params.id
     try {
@@ -49,6 +52,7 @@ ratings.get("/:id", async(req, res)=>{
 
 
 // Create rating
+/* Creating a new rating. */
 ratings.post("/", async(req, res)=>{
     const body = req.body
     try {
@@ -73,6 +77,7 @@ ratings.post("/", async(req, res)=>{
 
 
 // Create many rating
+/* Creating a new rating. */
 ratings.post("/create_many_ratings", async(req, res)=>{
     const body = req.body
     try {
@@ -99,6 +104,7 @@ ratings.post("/create_many_ratings", async(req, res)=>{
 })
 
 // Update ratings 
+/* Updating the rating with the id that is passed in the url. */
 ratings.patch("/:id", async(req, res)=>{
     const id = req.params.id
     const body = req.body
@@ -127,6 +133,7 @@ ratings.patch("/:id", async(req, res)=>{
 
 
 // Update ratings - upsert
+/* Updating the rating with the id that is passed in the url. */
 ratings.patch("/:id/upsert", async(req, res)=>{
     const id = req.params.id
     const body = req.body
@@ -155,6 +162,8 @@ ratings.patch("/:id/upsert", async(req, res)=>{
 
 
 // Update areas - upsert
+/* Updating all the documents in the collection that have the word "Creative" in the field "asignatura"
+with the body of the request. */
 ratings.put("/update_many_ratings/upsert", async(req, res)=>{
     const body = req.body
     try {
@@ -181,7 +190,11 @@ ratings.put("/update_many_ratings/upsert", async(req, res)=>{
     } finally {
     }
 })
+
+
 // Update areas
+/* Updating all the documents in the collection that have the word "Creative" in the field "asignatura"
+with the body of the request. */
 ratings.put("/update_many_ratings", async(req, res)=>{
     const body = req.body
     try {
@@ -210,6 +223,7 @@ ratings.put("/update_many_ratings", async(req, res)=>{
 })
 
 // Delete area
+/* Deleting the rating with the id that is passed in the url. */
 ratings.delete("/:id", async(req, res) => {
     const id = req.params.id
     try {
